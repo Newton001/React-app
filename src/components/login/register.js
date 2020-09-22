@@ -35,6 +35,7 @@ export class Register extends React.Component {
             username:"",
             email: email,
             password: password,
+            role:"",
             password_confirmation: password_confirmation
           }
         },

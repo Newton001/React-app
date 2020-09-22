@@ -1,76 +1,18 @@
-import React from "react";
 import "./App.scss";
-import { Login, Register } from "./components/login/index";
-//import { Header, Footer, Menu } from "./components/home";
-import Header from "./components/home/Header";
-import Footer from "./components/home/Footer";
-import Menu from "./components/home/Menu";
-import Content from "./components/home/Content";
-import axios from "axios";
+import { Register } from "./components/login/register";
+import React, { Component } from 'react'
+import { Login } from "./components/login/login";
 
-class App extends React.Component {
+export default class App1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogginActive: true,
+      isLogginActive: true
     };
-    this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
-    };
-
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
-
   componentDidMount() {
     //Add .right by default
     this.rightSide.classList.add("right");
-  }
-
-  checkLoginStatus() {
-    axios
-      .get("http://localhost:3001/logged_in", { withCredentials: true })
-      .then(response => {
-        if (
-          response.data.logged_in &&
-          this.state.loggedInStatus === "NOT_LOGGED_IN"
-        ) {
-          this.setState({
-            loggedInStatus: "LOGGED_IN",
-            user: response.data.user
-          });
-        } else if (
-          !response.data.logged_in &
-          (this.state.loggedInStatus === "LOGGED_IN")
-        ) {
-          this.setState({
-            loggedInStatus: "NOT_LOGGED_IN",
-            user: {}
-          });
-        }
-      })
-      .catch(error => {
-        console.log("check login error", error);
-      });
-  }
-
-  componentDidMount() {
-    this.checkLoginStatus();
-  }
-
-  handleLogout() {
-    this.setState({
-      loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
-    });
-  }
-
-  handleLogin(data) {
-    this.setState({
-      loggedInStatus: "LOGGED_IN",
-      user: data.user
-    });
   }
 
   changeState() {
@@ -95,10 +37,10 @@ class App extends React.Component {
         <div className="login">
           <div className="container" ref={ref => (this.container = ref)}>
             {isLogginActive && (
-              <Login containerRef={ref => (this.current = ref)} handleSuccessfulAuth={this.handleSuccessfulAuth} />
+              <Login containerRef={ref => (this.current = ref)} />
             )}
             {!isLogginActive && (
-              <Register containerRef={ref => (this.current = ref)}  handleSuccessfulAuth={this.handleSuccessfulAuth} />
+              <Register containerRef={ref => (this.current = ref)} />
             )}
           </div>
           <RightSide
@@ -127,4 +69,5 @@ const RightSide = props => {
   );
 };
 
-export default App;
+
+//export default App1;

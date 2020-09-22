@@ -1,13 +1,9 @@
 import React from "react";
 import "./App.scss";
-//import { Login, Register } from "./components/login/index";
-import Header from "./components/home/Header";
-import Footer from "./components/home/Footer";
-import Menu from "./components/home/Menu";
-import Content from "./components/home/Content";
 import { Component } from "react";
-import "./App1.jsx"
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import App1 from "./App1";
+import Home from "./Home";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
 
 export default class App extends Component {
@@ -89,23 +85,18 @@ export default class App extends Component {
     }
 
   render(){
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route
-           exact 
-           path={"/"} 
-           render = {props => (
-             <Header {...props}loggedInStatus={this.state.loggedInStatus} />
-           )} />
-          <Route exact path={"/"} component={Footer} />
-          <Route exact path={"/"} component={Menu} />
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
+    return (
+      <div className="App">
+        <BrowserRouter>
+        <Switch >
+                <Route path="/" exact component={App1} />
+                <Route path="/Home" exact component={Home} />
+              </Switch>
+        </BrowserRouter>
+      </div>
+    );
   }
 }
 
-/
+//export default App;
+
